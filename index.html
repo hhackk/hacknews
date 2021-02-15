@@ -278,7 +278,7 @@
                     url: `data/${endDate.clone().subtract(i, 'days').format('YYYY-MM-DD')}_articles.json`,
                     async: false,
                     success: function(data) {
-                        articles = articles.concat(JSON.parse(data))
+                        articles = articles.concat(data)
                     }
                 });
             }
