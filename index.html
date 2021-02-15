@@ -160,7 +160,6 @@
                     '本月': [moment().startOf('month'), moment().endOf('month')],
                     '上个月': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
                     '近7天': [moment().subtract(6, 'days'), moment()],
-                    '全部': [moment('2000-01-01'), moment()],
                 }
             }, function(start, end, label) {
                 startDate = start;
@@ -274,23 +273,20 @@
 
         function getDataByDateRange(startDate, endDate) {
             articles = [];
-            for (var i = 0; startDate.clone().add(i, 'days') <= endDate; i++) {
-                console.log(startDate.clone().add(i, 'days').format('YYYY-MM-DD'))
+            for (var i = 0; endDate.clone().subtract(i, 'days') >= startDate; i++) {
+                $.ajax({
+                    url: `data/${endDate.clone().subtract(i, 'days').format('YYYY-MM-DD')}_articles.json`,
+                    async: false,
+                    success: function(data) {
+                        articles = articles.concat(JSON.parse(data))
+                    }
+                });
             }
+            return articles;
         }
 
         function show_articles_and_keywords() {
-
-            getDataByDateRange(startDate, endDate)
-            articles = [];
-            $.ajax({
-                url: `data/2021-2-15_articles.json`,
-                async: false,
-                success: function(data) {
-                    articles = data
-                }
-            });
-            show_artices(articles, $('#pagination-articles'), $('.show-articles-tmpl'))
+            show_artices(getDataByDateRange(startDate, endDate), $('#pagination-articles'), $('.show-articles-tmpl'))
         }
 
         function show_favorite() {
