@@ -287,7 +287,7 @@
                 url: `data/2021-2-15_articles.json`,
                 async: false,
                 success: function(data) {
-                    articles = JSON.parse(data)
+                    articles = data
                 }
             });
             show_artices(articles, $('#pagination-articles'), $('.show-articles-tmpl'))
