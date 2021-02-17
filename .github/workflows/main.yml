@@ -51,7 +51,6 @@ jobs:
         run: |
           pwd
           ls -lR
-          ls -l /tmp/today.json
           cp /tmp/*articles.json data/
           git config user.name hhackk
           git config user.email hack163com@163.com
