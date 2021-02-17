@@ -26,7 +26,9 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run curl
-        run: date
+        run: |
+          cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+          date
 
       # Runs a set of commands using the runners shell
       - name: Run test
