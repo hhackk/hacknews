@@ -26,7 +26,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run curl
-        run: pwd
+        run: date
 
       # Runs a set of commands using the runners shell
       - name: Run test
