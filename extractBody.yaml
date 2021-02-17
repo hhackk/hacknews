@@ -1,0 +1,36 @@
+---
+  url: 'https://www.freebuf.com/'
+  body: '//div[@class="content-detail"]'
+---
+  url: 'https://www.anquanke.com/'
+  body: '//div[@class="article-content"]'
+---
+  url: 'https://www.secpulse.com/'
+  body: '//div[@class="left-9-code"]'
+---
+  url: 'https://www.sec-in.com/'
+  body: '//div[@class="show_left_title"]'
+---
+  url: 'https://www.4hou.com/'
+  body: '//article[@class="articlecontent"]'
+---
+  url: 'https://xz.aliyun.com/'
+  body: '//div[@id="topic_content"]'
+---
+  url: 'https://paper.seebug.org/'
+  body: '//section[@class="post-content"]'
+---
+  url: 'https://mp.weixin.qq.com/'
+  body: '//div[@class="rich_media_content"]'
+---
+  url: 'https://www.secvery.com/'
+  body: '//div[contains(@class,"entry-content")]'
+---
+  url: 'http://www.91ri.org/'
+  body: '//section[@class="article"]'
+---
+  url: 'https://bbs.ichunqiu.com/'
+  body: '//div[@class="pcb"]'
+---
+  url: 'https://github.com/'
+  body: '//div[@id="readme"]'
