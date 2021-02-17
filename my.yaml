@@ -60,6 +60,15 @@
   item_title: "./a/text()"
   item_url: ".//a/@href"
   item_date: ".//span[@class='dropcap']/text()"
+  
+---
+  name: '安全脉搏'
+  url: "https://www.secpulse.com/newpage/ajax_content"
+  item: "//div[contains(@class, 'contets_page')]//li[@class='content_page']"
+  item_title: ".//a[@class='title']/text()"
+  item_url: ".//a[@class='title']/@href"
+  item_date: ".//a[contains(@class, 'time')]/text()"
+  item_ext.catalog: ".//a[@class='tag']/text()"   
 ---
   name: 'Sec-News'
   url: "https://wiki.ioin.in"
