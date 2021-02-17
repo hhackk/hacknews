@@ -24,8 +24,7 @@ jobs:
         with:
            python-version: '3.x'
 
-      # Runs a single command using the runners shell
-      - name: Run curl
+      - name: Set TimeZone
         run: |
           cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
           date
@@ -57,11 +56,9 @@ jobs:
            ref: gh-pages
       - name: copy
         run: |
-          pwd
-          ls -lR
           cp /tmp/*articles.json data/
           git config user.name hhackk
           git config user.email hack163com@163.com
           git add .
-          git commit -m "add data"
-          git push
+          git commit -m "add data" || echo ok
+          git push || echo ok
