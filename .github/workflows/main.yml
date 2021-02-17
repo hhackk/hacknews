@@ -36,6 +36,7 @@ jobs:
           pip install requests
           pip install html2text
           pip install sqlalchemy
+          pip install flask_sqlalchemy
           pip install parsel
           python hello.py
           echo test, and deploy your project.
