@@ -40,7 +40,7 @@ jobs:
           pip install parsel
           pip install pyyaml
           pip install flask_cors
-          #python hello.py
+          python hello.py
           echo test, and deploy your project.
       - uses: actions/checkout@v2
         with:

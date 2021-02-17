@@ -595,3 +595,4 @@ def g_article():
 
 if __name__ == "__main__":
     g_article()
+    print(get_articles_today())
