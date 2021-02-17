@@ -44,6 +44,14 @@ jobs:
           pip install flask_cors
           python hello.py
           echo test, and deploy your project.
+      - name: commit mysec.db
+        run: | 
+          git config user.name hhackk
+          git config user.email hack163com@163.com
+          git add .
+          git commit -m "mysec.db" || echo ok
+          git push  || echo ok
+          
       - uses: actions/checkout@v2
         with:
            ref: gh-pages
