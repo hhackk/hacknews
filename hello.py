@@ -279,7 +279,8 @@ def get_articles_today():
         'url':a.url,
         "create_at": a.create_at.strftime('%Y-%m-%d %H:%M'),
         'site_name': p.name})
-    with open('/tmp/today.json', 'w') as f:
+    filename = '/tmp/'+datetime.now().strftime('%Y-%m-%d')+_articles.json
+    with open(filename, 'w', encoding='utf-8) as f:
         json.dump(articles_view, f)                  
     return json.dumps(articles_view)  
 
