@@ -50,6 +50,8 @@ jobs:
           pwd
           ls -lR
           touch data/gcf.json
+          git config user.name hhackk
+          git config user.email hack163com@163.com
           git add data/gcf.json
           git commit -m "add data"
           git push
