@@ -26,7 +26,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run curl
-        run: echo x
+        run: pwd
 
       # Runs a set of commands using the runners shell
       - name: Run test
@@ -42,3 +42,10 @@ jobs:
           pip install flask_cors
           python hello.py
           echo test, and deploy your project.
+      - uses: actions/checkout@v2
+        with:
+           ref: gh-pages
+      - name: copy
+        run: |
+          pwd
+          ls -lR
