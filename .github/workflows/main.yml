@@ -55,6 +55,6 @@ jobs:
           cp /tmp/today.json data/today.json
           git config user.name hhackk
           git config user.email hack163com@163.com
-          git add data/gcf.json
+          git add .
           git commit -m "add data"
           git push
