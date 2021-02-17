@@ -40,7 +40,7 @@ jobs:
           pip install parsel
           pip install pyyaml
           pip install flask_cors
-          python hello.py
+          #python hello.py
           echo test, and deploy your project.
       - uses: actions/checkout@v2
         with:
@@ -49,3 +49,7 @@ jobs:
         run: |
           pwd
           ls -lR
+          touch data/gcf.json
+          git add data/gcf.json
+          git commit -m "add data"
+          git push
