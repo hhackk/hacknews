@@ -279,7 +279,7 @@ def get_articles_today():
         'url':a.url,
         "create_at": a.create_at.strftime('%Y-%m-%d %H:%M'),
         'site_name': p.name})
-    return jsonify(articles_view)  
+    return json.dumps(articles_view)  
 
 
 @app.route("/getjson")
