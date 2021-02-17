@@ -17,13 +17,18 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+           python-version: '3.x'
 
       # Runs a single command using the runners shell
       - name: Run curl
         run: curl http://141.164.46.127:8000
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Run test
         run: |
-          echo Add other actions to build,
+          python -c "import sys; print(sys.version)"
           echo test, and deploy your project.
