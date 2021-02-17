@@ -280,7 +280,7 @@ def get_articles_today():
         "create_at": a.create_at.strftime('%Y-%m-%d %H:%M'),
         'site_name': p.name})
     with open('/tmp/today.json', 'w') as f:
-        json.dump(data, f)                  
+        json.dump(articles_view, f)                  
     return json.dumps(articles_view)  
 
 
