@@ -39,5 +39,6 @@ jobs:
           pip install flask_sqlalchemy
           pip install parsel
           pip install pyyaml
+          pip install flask_cors
           python hello.py
           echo test, and deploy your project.
