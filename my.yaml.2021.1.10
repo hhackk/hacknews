@@ -1,0 +1,615 @@
+---
+  name: 'hackinn'
+  url: "https://www.hackinn.com/"
+  item: "//div[@id='main']/article"
+  item_title: ".//h2[@class='post-title']/a/text()"
+  item_url: ".//h2[@class='post-title']/a/@href"
+  item_date: ".//time/@datetime"
+---
+  name: 'paper.seebug'
+  url: "https://paper.seebug.org/"
+  item: "//div[@class='main-inner']/article"
+  item_title: ".//h5[@class='post-title']/a/text()"
+  item_url: "concat('https://paper.seebug.org', .//h5[@class='post-title']/a/@href)"
+  item_date: ".//time[@class='fulldate']/@datetime"
+  item_ext.catalog: ".//section[@class='post-meta']//a/text()"
+---
+  name: '阿里先知'
+  url: "https://xz.aliyun.com"
+  item: '//table/tr'
+  item_title: ".//a[contains(@class, 'topic-title')]/text()"
+  item_url: "concat('https://xz.aliyun.com',.//a[contains(@class, 'topic-title')]/@href)"
+  item_ext.catalog: ".//p[@class='topic-info']//a[contains(@href, '/node/')]/text()"
+---
+  name: 'freebuf'
+  url: "https://www.freebuf.com/"
+  item: "//div[@class='article-item']"
+  item_title: ".//span[contains(@class, 'title text-line-1')]/text()"
+  item_url: "concat('https://www.freebuf.com',.//div[contains(@class, 'item-content')]/a/@href)"
+  item_ext.catalog: ".//span[@class='ant-tag ant-tag-has-color']/text()"
+---
+  name: '安全客'
+  url: "https://www.anquanke.com/"
+  item: "//div[contains(@class, 'article-item')]"
+  item_title: ".//div[@class='title']/a/text()"
+  item_url: "concat('https://www.anquanke.com',.//div[@class='title']/a/@href)"
+  item_ext.catalog: ".//div[@class='tag tag-gray']/span/text()"
+---
+  name: 'i春秋'
+  url: "https://bbs.ichunqiu.com/portal.php"
+  item: "//ul[contains(@class, 'ui_list cl')]/li"
+  item_title: ".//h3[@class='clr']/a/text()"
+  item_url: "concat('https://bbs.ichunqiu.com/', .//h3[@class='clr']/a/@href)"
+---
+  name: '嘶吼'
+  url: "https://www.4hou.com/"
+  item: "//div[@id='new-post6']"
+  item_title: ".//div[@class='new_con']/a/h1/text()"
+  item_url: ".//div[@class='new_con']/a/@href"
+  item_ext.catalog: ".//div[@class='new_img']/span/text()"  
+---
+  name: '腾讯玄武实验室'
+  url: "https://i.hacking8.com/nodes/sec.today/"
+  item: "//div[@class='panel-body']/table/tbody/tr"
+  item_title: ".//div[@class='media-body']/pre/text()"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'sec-wiki'
+  url: "https://sec-wiki.com/"
+  item: "//div[@class='contents']/div[@id='content1']/p"
+  item_title: "./a/text()"
+  item_url: ".//a/@href"
+  item_date: ".//span[@class='dropcap']/text()"
+---
+  name: '安全脉搏'
+  url: "https://www.secpulse.com/newpage/ajax_content"
+  item: "//div[contains(@class, 'contets_page')]//li[@class='content_page']"
+  item_title: ".//a[@class='title']/text()"
+  item_url: ".//a[@class='title']/@href"
+  item_date: ".//a[contains(@class, 'time')]/text()"
+  item_ext.catalog: ".//a[@class='tag']/text()"  
+---
+  name: 'Sec-News'
+  url: "https://wiki.ioin.in"
+  item: "//table[contains(@class, 'width-auto')]//tbody/tr"
+  item_title: ".//a[@class='visit-color']/text()"
+  item_url: "concat('https://wiki.ioin.in',.//a[@class='visit-color']/@href)"
+  item_date: ".//td[1]/text()"
+  item_ext.catalog: ".//td[3]/a/text()"
+---
+  name: '极度安全'
+  url: "https://www.secvery.com/"
+  item: "//div[contains(@class, 'main-list')]//li[@class='item']"
+  item_title: ".//h2[@class='item-title']/a/text()"
+  item_url: ".//h2[@class='item-title']/a/@href"
+  item_ext.catalog: ".//a[@class='item-category']/text()"
+#---
+  #name: 'sec-in'  --json
+  #url: 'https://sec-in.com/api/v1/common/getAdvertising'
+#---
+#  name: '吾爱漏洞'  --好像又问题，而且很
+#  url: "http://www.52bug.cn/hkjs"
+#  item: "//ul[@class='itemarticle-warp']/li"
+#  item_title: ".//a[@class='itemarticle-title']/text()"
+#  item_url: ".//a[@class='itemarticle-title']/@href"
+#  item_date: ".//div[@class='itemarticle-extra']/span[1]/text()"
+
+---
+  name: '91ri'
+  url: "http://www.91ri.org/"
+  item: "//div[@class='articles']//article[contains(@class, 'posts')]"
+  item_title: ".//h1/a/text()"
+  item_url: ".//h1/a/@href"
+  item_date: ".//div[contains(@class, 'postmeta right')]/text()"
+  item_ext.catalog: ".//div[@class='topic left']/span/a/text()"
+---
+  name: '合天智汇'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=合天智汇"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MjM5MTYxNjQxOA==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'GeekPwn'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=GeekPwn"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzA3Nzc2MjIxOA==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '黑白之道'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=黑白之道"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzAxMjE3ODU3MQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'V安全资讯'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=V安全资讯"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzI4MDQ1MzQ0NA==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '长亭安全课堂'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=长亭安全课堂"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzIwMDk1MjMyMg==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '重生信息安全'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=重生信息安全"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzU2MjM4NDYxOQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '维他命安全'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=维他命安全"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzUxMDQzNTMyNg==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '绿盟科技'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=绿盟科技"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MjM5ODYyMTM4MA==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '雷神众测'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=雷神众测"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzI0NzEwOTM0MA==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '绿盟科技研究通讯'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=绿盟科技研究通讯"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzIyODYzNTU2OA==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '安恒信息'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=安恒信息"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MjM5NTE0MjQyMg==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '邑安全'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=邑安全"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzUyMzczNzUyNQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '默社安全'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=默社安全"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzU5NzU0ODc5Mg==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'SecIN技术平台'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=SecIN技术平台"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzI4Mzc0MTI0Mw==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '疯猫网络'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=疯猫网络"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzIyMzE5NTQ3Ng==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '开源聚合网络空间安全研究院'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=开源聚合网络空间安全研究院"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzI4NTE4NDAyNA==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '星阑科技'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=星阑科技"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'Mzg5NjEyMjA5OQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '携程技术'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=携程技术"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MjM5MDI3MjA5MQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '信安之路'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=信安之路"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzI5MDQ2NjExOQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '水滴安全实验室'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=水滴安全实验室"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzUzMDA4NDMzNw==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '猎户攻防实验室'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=猎户攻防实验室"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzI1NDg4MTIxMw==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '红日安全'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=红日安全"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzI4NjEyMDk0MA==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '天融信阿尔法实验室'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=天融信阿尔法实验室"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'Mzg3MDAzMDQxNw==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '天御攻防实验室'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=天御攻防实验室"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzU0MzgyMzM2Nw==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'PolarisLab'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=PolarisLab"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzA5MDgwNTA1Ng==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'T00ls'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=T00ls"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MjM5MDkwNjA2Nw==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'ArkTeam'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=ArkTeam"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzA3Mjk4MDMzMQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '网络安全社区悦信安'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=网络安全社区悦信安"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzU0MjExNDkyMQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '米斯特安全团队'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=米斯特安全团队"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzU2NDc2NDYwMA==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'Ms08067安全实验室'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=Ms08067安全实验室"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzU1NjgzOTAyMg==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '贝塔安全实验室'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=贝塔安全实验室"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'Mzg4MzA4Nzg4Ng==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '弥天安全实验室'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=弥天安全实验室"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzU2NDgzOTQzNw==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '西子实验室'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=西子实验室"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzI1MjYyNTA4Mw==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '洞见网安'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=洞见网安"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzAxNzg3NzMyNQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '百度安全实验室'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=百度安全实验室"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzA3NTQ3ODI0NA==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '川云安全团队'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=川云安全团队"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'Mzg4NTA0MDg2MA==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '盘古实验室'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=盘古实验室"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzI2MDA0MTYyMQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '鸿鹄实验室'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=鸿鹄实验室"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzU0MjUxNjgyOQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'Gcow安全团队'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=Gcow安全团队"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzUyNzk2NDcwMw==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'Khan安全团队'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=Khan安全团队"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzAwMjQ2NTQ4Mg==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '连接世界的暗影'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=连接世界的暗影"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzI2MzA3OTgxOA==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '安世加'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=安世加"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzU2MTQwMzMxNA==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '零度安全攻防实验室'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=零度安全攻防实验室"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzI3MzUwMTQwNg==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'WhITECat安全团队'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=WhITECat安全团队"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzAwMzc2MDQ3NQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '酒仙桥六号部队'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=酒仙桥六号部队"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzAwMzYxNzc1OA==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '安恒信息安全研究院'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=安恒信息安全研究院"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzUyMDEyNTkwNA==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'T9Sec'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=T9Sec"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzU4OTExNTk0OA==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'IRT工业安全红队'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=IRT工业安全红队"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzAwNDI0MDYwMw==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '5号黯区'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=5号黯区"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'Mzg2NzIwMTM3NQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '黑伞攻防实验室'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=黑伞攻防实验室"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzU0MzkzOTYzOQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'Pai Sec Team'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=Pai Sec Team"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzU3MTU3NDk4Mw==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '哈拉少安全小队'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=哈拉少安全小队"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzAxNzkyOTgxMw==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'LSCteam'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=LSCteam"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzUyMjAyODU1NA==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '轩辕实验室'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=轩辕实验室"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzI1MTkwODMxMQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'yudays实验室'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=yudays实验室"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzU0NjU5NDE4Mg==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '渗透云笔记'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=渗透云笔记"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzU2NzkxMDUyNg==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '渗透攻击红队'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=渗透攻击红队"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzkxNDEwMDA4Mw==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'null安全团队'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=null安全团队"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzIxOTk2Mjg1NA==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'Admin Team'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=Admin Team"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzI5NTQ1MTI3MQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '雷石安全实验室'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=雷石安全实验室"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzI5MDE0MjQ1NQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'ChaBug'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=ChaBug"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzU0ODg2MDA0NQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'nmask'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=nmask"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzI5NTQ5MTAzMA==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '红队防线'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=红队防线"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzI0OTkzOTc2Nw==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '安全泰式柑汁'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=安全泰式柑汁"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'Mzg5MjEwNjU5Mg==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '安全小飞侠'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=安全小飞侠"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzAwMzAwOTQ5Nw==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'qz安全情报分析'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=qz安全情报分析"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzI1MDA1MjcxMw==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'LemonSec'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=LemonSec"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzUyMTA0MjQ4NA==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '湛卢工作室'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=湛卢工作室"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzU5OTQ3ODM0Mw==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '安全祖师爷'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=安全祖师爷"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzUyNTk1NDQ3Ng==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '嘶吼专业版'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=嘶吼专业版"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzI0MDY1MDU4MQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'HACK学习呀'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=HACK学习呀"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzI5MDU1NDk2MA==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'APT攻击'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=APT攻击"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'Mzg5ODExMDc1NQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '天億网络安全'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=天億网络安全"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzU4ODU1MzAyNg==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '关注安全技术'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=关注安全技术"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzA4MDMwMjQ3Mg==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: 'GobySec'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=GobySec"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzI4MzcwNTAzOQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '泰阿安全实验室'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=泰阿安全实验室"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'Mzg5MDQyMzg3NQ==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '吾爱破解论坛'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=吾爱破解论坛"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MjM5Mjc3MDM2Mw==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '看雪学院'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=看雪学院"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MjM5NTc2MDYxMw==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '物联网IOT安全'
+  url: "https://i.hacking8.com/nodes/doonsec/#mysite=物联网IOT安全"
+  item: "//div[@class='panel-body']/table/tbody/tr//div[@class='link']/a/@href[contains(string(),'MzUzMjcxMzg5Mg==')]/../../.."
+  item_title: "substring-after(.//div[@class='link']/a/text(), '] ')"
+  item_url: ".//div[@class='link']/a/@href"
+---
+  name: '微摄信息网'
+  url: "http://vulsee.com/"
+  item: "//article[contains(@class, 'excerpt excerpt-')]"
+  item_title: ".//h2//a/text()"
+  item_url: ".//h2//a/@href"
+  item_ext.catalog: ".//a[@class='cat']/text()"
+---
+  name: '字节脉搏'
+  url: "https://cloud.tencent.com/developer/user/7021299"
+  item: "//div[@class='com-3-article-panel theme2']"
+  item_title: ".//h3[@class='com-3-article-panel-title']/text()"
+  item_url: "concat('https://cloud.tencent.com',.//a[@class='panel-link']/@href)"
+  item_date: ".//time/@datetime"
+---
+  name: 'moonsec'
+  url: "https://www.moonsec.com/"
+  item: "//li[@class='item']"
+  item_title: ".//div[@class='item-content']//a/text()"
+  item_url: ".//div[@class='item-content']//a/@href"
+  item_date: "..//div[@class='item-content']//span[@class='item-meta-li date']/text()"
+  item_ext.catalog: ".//a[@class='item-category']/text()"
+---
+  name: 'K8哥哥'
+  url: "http://k8gege.org/"
+  item: "//article[@class='post']"
+  item_title: "substring-after(..//h1[@class='post-title']//a/text(), '〗')"
+  item_url: "concat('http://k8gege.org',.//h1[@class='post-title']//a/@href)"
+  item_date: ".//time[@class='post-date']/text()"  
+---
+  name: '阿尔法实验室'
+  url: "http://blog.topsec.com.cn/"
+  item: "//div[@id='post-entries']/article"
+  item_title: ".//div/h2//a/text()"
+  item_url: ".//div/h2//a/@href"
+  item_date: ".//footer//li[3]/text()"
+  item_ext.catalog: ".//li[@class='meta-category']/a/text()"  

@@ -1,0 +1,5 @@
+0 * * * * /root/secNewsCol/collect.sh
+0 * * * * /root/test/git/run.sh
+* */5 * * * /root/myhacknews/collect.sh
+* */3 * * * /root/myhacknews2/collect.sh
+

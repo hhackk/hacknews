@@ -1,12 +1,12 @@
 ---
   name: 'hacknews'
-  url: "https://news.ycombinator.com/newest"
+  url: "https://news.ycombinator.com/"
   item: "//table[@class='itemlist']/tr[@class='spacer']"
   item_title: "./preceding-sibling::tr[2]/td[@class='title']/a/text()"
   item_url: "./preceding-sibling::tr[2]/td[@class='title']/a/@href"
   item_date: "./preceding-sibling::tr[1]//span[@class='age']/a/text()"
-  item_hacknewslink: "./preceding-sibling::tr[1]/td[@class='subtext']/a[1]/@href"
+  item_hacknewslink: "./preceding-sibling::tr[1]/td[@class='subtext']/a[3]/@href"
   item_comments: "normalize-space(substring-before(./preceding-sibling::tr[1]/td[@class='subtext']/a[3]/text(), 'comments'))"
   item_points: "normalize-space(substring-before(./preceding-sibling::tr[1]/td[@class='subtext']/span[@class='score']/text(), 'points'))"
-  item_fromsiteurl: "./preceding-sibling::tr[2]/td[@class='title']/span[contains(@class, 'sitebit')]/a/@href"
+  item_fromsite: "./preceding-sibling::tr[2]/td[@class='title']/span[contains(@class, 'sitebit')]/a/@href"
   item_fromsitename: "./preceding-sibling::tr[2]/td[@class='title']//span[@class='sitestr']/text()"
