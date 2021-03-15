@@ -41,7 +41,7 @@ jobs:
           pip install parsel
           pip install pyyaml
           pip install flask_cors
-          pip install execjs
+          pip install PyExecJS
           python myhacknews2.py
           echo test, and deploy your project.
       - name: commit mysec.db
