@@ -24,7 +24,7 @@ jobs:
         with:
            python-version: '3.x'
 
-      - name: Set TimeZone
+      - name: Set  TimeZone
         run: |
           cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
           date
