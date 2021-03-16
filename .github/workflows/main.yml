@@ -30,7 +30,7 @@ jobs:
           date
 
       # Runs a set of commands using the runners shell
-      - name: Run test
+      - name: Run  test
         run: |
           python -m pip install --upgrade pip
           pip install flask
