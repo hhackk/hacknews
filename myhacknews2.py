@@ -415,6 +415,7 @@ def get_articles_today():
             .all():       
         articles_view.append({'id':a.id,
         'title':a.title, 
+        'title_zh':a.title_zh,
         'url':a.url,
         "create_at": a.create_at.strftime('%Y-%m-%d %H:%M'),
         'site_name': p.name})
