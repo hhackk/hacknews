@@ -267,7 +267,7 @@ def filter_article(title, url, fromsiteurl):
                 'Kubernetes','k8s',' extension','ssti','command inject','code inject','ddos',\
                 'elasticsearch','kibana','openssl','cve-','javaagent','plugin','vs code',\
                 'json','python', 'fuzz','open source', 'opensource', 'apache', 'java', 'golang',\
-                'c++', 'unix', 'google'\
+                'c++', 'unix', 'google', 'simple'\
                 'springboot','nginx','docker','nodejs','Vulnerab','css' , 'Decompile', 'blackhat', \
                 'Pentest' , 'mysql', 'mongodb', 'bypass', 'Clickjacking','CRLF', \
                 'Deserialization', 'http' ,'Race Condition','node.js', 'android',\
