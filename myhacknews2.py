@@ -313,6 +313,7 @@ def handle_site(site2):
         item = requests.get(itemurl, headers=headers, verify=False, timeout=20).json()
         if not item:
             print(itemurl)
+            continue
         if "title" not in item:
             continue
         if 'url' not in item:
