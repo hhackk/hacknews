@@ -384,6 +384,6 @@ def get_articles_today():
 
 if __name__ == "__main__":
     # app.run(host='0.0.0.0', port=5002, debug=True)  
-    init_db()
+    #init_db()
     g_article()
     print(get_articles_today())
