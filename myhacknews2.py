@@ -259,13 +259,28 @@ headers = {
 
 
 def filter_article(title, url, fromsiteurl):
-    keywords = ['ptrace','LD_PRELOAD','hook','linux','codeql','html','ssrf','csrf','sql','Asynchronous','windows','data science','github', 'Groovy','javascript','Cyber Security', 'react','sqlite','library','debug','jquery','unix','webpack','tool','virtualbox','virtual box','burpsuite','chrome','firefox','lightweight','database','Developer','Code Execute','Remote Command', 'Kubernetes','k8s',' extension','ssti','command inject','code inject','ddos','elasticsearch','kibana','openssl','cve-','javaagent','plugin','vs code','json','python', 'fuzz','open source', 'opensource', 'apache', 'java', 'golang','springboot','nginx','docker','nodejs','Vulnerab','css' , 'Decompile', 'blackhat', 'Pentest' , 'mysql', 'mongodb', 'bypass', 'Clickjacking','CRLF', 'Deserialization', 'http' ,'Race Condition','node.js', 'android','xpath','burp suite', 'redos','nosql', 'deobfuscator', 'graphql', 'tain analysis', 'code analysis', 'IAST', 'RASP', 'osquery', 'huawei', 'machine learning','GraphQL', 'terminal', 'dashboard','ftp']
+    keywords = ['ptrace','LD_PRELOAD','hook','linux','codeql','html','ssrf','csrf','sql','Asynchronous','windows',\
+                'data science','github', 'Groovy','javascript','Cyber Security', \
+                'react','sqlite','library','debug','jquery','unix', \
+                'webpack','tool','virtualbox','virtual box','burpsuite','chrome',\
+                'firefox','lightweight','database','Developer','Code Execute','Remote Command', \
+                'Kubernetes','k8s',' extension','ssti','command inject','code inject','ddos',\
+                'elasticsearch','kibana','openssl','cve-','javaagent','plugin','vs code',\
+                'json','python', 'fuzz','open source', 'opensource', 'apache', 'java', 'golang',\
+                'springboot','nginx','docker','nodejs','Vulnerab','css' , 'Decompile', 'blackhat', \
+                'Pentest' , 'mysql', 'mongodb', 'bypass', 'Clickjacking','CRLF', \
+                'Deserialization', 'http' ,'Race Condition','node.js', 'android',\
+                'xpath','burp suite', 'redos','nosql', 'deobfuscator', 'graphql', \
+                'tain analysis', 'code analysis', 'IAST', 'RASP', 'osquery', 'huawei', 'machine learning',\
+                'GraphQL', 'terminal', 'dashboard','ftp', 'powerful','automat', 'roadmap', 'flexible', 'parallel',\
+                'instrument'
+               ]
     for keyword in keywords:
         if keyword.upper() in title.upper():
             return True
     if 'github' in url:
         return True
-    if re.search(r'\bweb\b|\bapi\b|\bjdk\b|\bdll\b|\bvue\b|\basync\b|\bDistributed\b|\bssh\b|\bAPIs\b|\.js\bi|\blearn\b|\bDjango\b|\bOAuth\b|\bxxe\b|\bxss\b|\bcli\b', title, re.I):
+    if re.search(r'\bweb\b|\bapi\b|\bjdk\b|\bdll\b|\bvue\b|\basync\b|\bDistributed\b|\bssh\b|\bAPIs\b|\.js\bi|\blearn\b|\bDjango\b|\bOAuth\b|\bxxe\b|\bxss\b|\bcli\b|\bfast\b', title, re.I):
         return True
     if re.search(r'\bRust\b|\bAI\b', title):
         return True
