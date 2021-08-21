@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta,date
 from flask import flash
 from flask import Flask
 from flask import redirect
@@ -20,7 +20,7 @@ import html2text
 import csv
 import os
 import re
-import glob 
+import glob
 import math
 from shlex import split
 from urllib.parse import urlparse
@@ -89,7 +89,7 @@ class Article(db.Model):
     date = db.Column(db.String(128))
     points = db.Column(db.Integer)
     comments = db.Column(db.Integer)
-    hacknewslink = db.Column(db.String(128))
+    hacknewsid = db.Column(db.Integer, index = True)
     fromsiteurl = db.Column(db.String(512))
     fromsitename = db.Column(db.String(128))
     summary = db.Column(db.String(512))
@@ -169,7 +169,7 @@ def get_groups():
     groups = [
         {0:'我关注的',  1:'SSTI XSS XXE SSRF CSRF SQLI "command inject" ysoserial github codeql RASP javascript java python php vscode powershell LD_PRELOAD ptrace hook javaagent byteman powerful frida ettercap wireshark burp sqlmap commix mimikatz Cobaltstrike "Cobalt strike"'},
         ]
-    return jsonify(groups)    
+    return jsonify(groups)
 
 
 @app.route("/api/articles")
@@ -196,22 +196,22 @@ def get_articles():
         .group_by(Article.title) \
         .order_by(Article.create_at.desc()) \
             .all():
-                  
+
         if len(mapKeyword2Article):
             foundKeyWord = False
             for keyword in mapKeyword2Article.keys():
                 if keyword == '未匹配到关键字的文章':
                     continue
                 if keyword.upper() in a.title.upper():
-                    if not foundKeyWord:                  
+                    if not foundKeyWord:
                         article_views_filter_keywords.append(a.id)
-                        foundKeyWord = True                                      
+                        foundKeyWord = True
                     mapKeyword2Article[keyword].append(a.id)
             if not foundKeyWord:
                 mapKeyword2Article['未匹配到关键字的文章'].append(a.id)
         else:
             article_views_filter_keywords.append(a.id)
-    print('====ok')  
+    print('====ok')
     all_num = len(article_views_filter_keywords)
     listKeyword2Article = []
     #print(mapKeyword2Article)
@@ -230,11 +230,11 @@ def get_articlesbyids():
         .filter(Article.page_id == Page.id) \
         .filter(Article.id.in_(ids)) \
         .order_by(Article.create_at.desc()) \
-            .all():       
+            .all():
         articles_view.append({'id':a.id,
-        'title':a.title, 
+        'title':a.title,
         'title_zh':a.title_zh,
-        'hacknewslink': a.hacknewslink,
+        'hacknewslink': '',
         'url':a.url,
         "create_at": a.create_at.strftime('%Y-%m-%d %H:%M'),
         'site_name': p.name})
@@ -286,9 +286,9 @@ def filter_article(title, url, fromsiteurl):
         return True
 
    # if 'github' in fromsiteurl:
-   #     return True    
+   #     return True
 
-    return False 
+    return False
 
 def handle_site(site2):
     print(site2)
@@ -302,99 +302,40 @@ def handle_site(site2):
         db.session.add(page)
         db.session.add(site)
         db.session.commit()
-
-    page_text = requests.get(site2.url, headers=headers, verify=False, timeout=20).text
-    # print(page_text)
-    selector = Selector(page_text)
-    articles = selector.xpath(site2.item)
-    #article_lst = []
-    ext = ''
-    for index, article in enumerate(articles):
-        if article.xpath(site2.item_title).get() is None:
+    newurl = 'https://hacker-news.firebaseio.com/v0/newstories.json'
+    newsIds = requests.get(newurl, headers=headers, verify=False, timeout=20).json()
+    # print(newsIds)
+    for newsId in newsIds:
+        print(newsId)
+        if db.session.query(Article).filter_by(hacknewsid=newsId).first() is not None:
+            break
+        itemurl = 'https://hacker-news.firebaseio.com/v0/item/%d.json'%newsId
+        item = requests.get(itemurl, headers=headers, verify=False, timeout=20).json()
+        print(item["title"])
+        if 'url' not in item:
             continue
-        title = article.xpath(site2.item_title).get().strip()
-        url = article.xpath(site2.item_url).get()
-        if site2.item_date:
-            date = article.xpath(site2.item_date).get()
-            if date:
-                date = date.strip()
-        else:
-            date = ''
 
-        if '刚刚' in date:
-            date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        elif 'minutes' in date:
-            minute = int(re.compile(r'\d*').findall(date)[0])
-            date =(datetime.now() - timedelta(minutes=minute)).strftime('%Y-%m-%d %H:%M:%S')
-        elif 'hour' in date:
-            hour = int(re.compile(r'\d*').findall(date)[0])
-            date =(datetime.now() - timedelta(hours=hour)).strftime('%Y-%m-%d %H:%M:%S')
-        elif 'day' in date:
-            day = int(re.compile(r'\d*').findall(date)[0])
-            date =(datetime.now() - timedelta(days=day) ).strftime('%Y-%m-%d %H:%M:%S')  
-        elif 'months' in date:
-            months = int(re.compile(r'\d*').findall(date)[0])
-            date =(datetime.now() - timedelta(months=months) ).strftime('%Y-%m-%d %H:%M:%S')     
-        elif 'years' in date:
-            years = int(re.compile(r'\d*').findall(date)[0])
-            date =(datetime.now() - timedelta(years=years) ).strftime('%Y-%m-%d %H:%M:%S')                      
+        if not filter_article(item["title"],item["url"],''):
+            continue
 
-        if site2.item_ext:
-            if 'item_ext.catalog' in site2.item_ext.keys():
-                catalog = article.xpath(site2.item_ext['item_ext.catalog']).get()
-                if catalog:
-                    catalog = catalog.strip()
-                ext = json.dumps({'catalog': catalog})
-                #print(ext)
-            if 'item_ext.tags' in site2.item_ext.keys():
-                tags = article.xpath(site2.item_ext['item_ext.tags']).get()
-                if tags:
-                    tags = tags.strip()
-                ext = json.dumps({'tags': catalog})                 
-                #print(ext)                  
-        #print(url)
-        print(article.xpath(site2.item_comments).get())
-        if db.session.query(Article).filter_by(url=url, title=title).first() is not None:
-            continue
-        print(article.xpath(site2.item_comments))
-        hacknewslink = article.xpath(site2.item_hacknewslink).get()
-        #comments = int(article.xpath(site2.item_comments).get().strip(), 10)
-        #points = int(article.xpath(site2.item_points).get().strip(), 10)
-        fromsiteurl = article.xpath(site2.item_fromsiteurl).get()
-        if fromsiteurl :
-            fromsiteurl = fromsiteurl.strip()
-        fromsitename = article.xpath(site2.item_fromsitename).get()
-        if fromsitename:
-            fromsitename = fromsitename.strip()
-        #print(title.encode('utf-8'))
-        if not filter_article(title,url,fromsiteurl):
-            print(title)
-            continue
-        page = db.session.query(Page).filter_by(url=site2.url).first()
-        # print(page.url)
-        article2 = Article(title=title, url=url, hacknewslink=hacknewslink, comments=0, points=0, fromsiteurl=fromsiteurl,fromsitename=fromsitename, date=date, ext=ext)
+        article2 = Article(title=item["title"], url=item["url"], hacknewsid=newsId, comments=0, points=0,\
+         fromsiteurl=item["url"],fromsitename=item["url"], date=date.fromtimestamp(item["time"]), ext='')
         article2.category_id = 1
-        article2.page_id = page.id
-        article2.title_zh = translate_en2zh(title)
-        #html = requests.get(url, headers=headers, verify=False).text
-        #extractor = GeneralNewsExtractor()
-        #result = extractor.extract(html)
-        #article2.text = extractMainBody(url)
+        article2.page_id = 1
+        article2.title_zh = translate_en2zh(item['title'])
         db.session.add(article2)
-        # article_lst.append(article2)
-    #page.articles = article_lst
     db.session.commit()
     return "ok"
 
 
 def data2db(items):
     for item in items:
-        article2 = Article(title=item['title'], url=item['url'], date=item['date'], ext=item['ext'], create_at = item['create_at'])    
-        article2.category_id = 1    
+        article2 = Article(title=item['title'], url=item['url'], date=item['date'], ext=item['ext'], create_at = item['create_at'])
+        article2.category_id = 1
         article2.page_id = item['page_id']
-        db.session.add(article2)  
-    db.session.commit()        
-        
+        db.session.add(article2)
+    db.session.commit()
+
 
 @app.route("/g_article", methods=['GET'])
 def g_article():
@@ -411,13 +352,13 @@ def g_article():
         if 'item_ext.tags'  in site:
             item_ext['item_ext.tags'] = site['item_ext.tags']
         if 'item_ext.catalog'  in site:
-            item_ext['item_ext.catalog'] = site['item_ext.catalog']     
-            print(item_ext)  
+            item_ext['item_ext.catalog'] = site['item_ext.catalog']
+            print(item_ext)
         aSite = Site2(site['name'], site['url'], site['item'],
                       site['item_title'], site['item_url'],  site['item_hacknewslink'],site['item_comments'], site['item_points'],  site['item_fromsiteurl'], site['item_fromsitename'], date, item_ext)
         handle_site(aSite)
     return "ok"
-    
+
 
 @app.route("/api/articles_today")
 def get_articles_today():
@@ -427,20 +368,21 @@ def get_articles_today():
         .filter(Article.create_at >= datetime.now().strftime('%Y-%m-%d')) \
         .filter(Article.create_at < (datetime.now()+timedelta(days=1) ).strftime('%Y-%m-%d')) \
         .order_by(Article.create_at.desc()) \
-            .all():       
+        .order_by(Article.hacknewsid.desc()) \
+            .all():
         articles_view.append({'id':a.id,
-        'title':a.title, 
+        'title':a.title,
         'title_zh':a.title_zh,
         'url':a.url,
         "create_at": a.create_at.strftime('%Y-%m-%d %H:%M'),
         'site_name': p.name})
-    filename = '/tmp/'+datetime.now().strftime('%Y-%m-%d')+'_articles.json'
+    filename = './'+datetime.now().strftime('%Y-%m-%d')+'_articles.json'
     with open(filename, 'w', encoding='utf-8') as f:
-        json.dump(articles_view, f)                  
+        json.dump(articles_view, f)
     return json.dumps(articles_view)
 
 
 if __name__ == "__main__":
-    # app.run(host='0.0.0.0', port=5002, debug=True)
+    # app.run(host='0.0.0.0', port=5002, debug=True)  
     g_article()
-    print(get_articles_today())
+    #print(get_articles_today())
