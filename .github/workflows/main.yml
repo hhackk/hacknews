@@ -50,6 +50,7 @@ jobs:
           git config user.email hack163com@163.com
           git add .
           git commit -m "mysec.db" || echo ok
+          git pull origin master || echo ok
           git push  || echo ok
           
       - uses: actions/checkout@v2
