@@ -49,9 +49,9 @@ jobs:
           git config user.name hhackk
           git config user.email hack163com@163.com
           git add .
-          git commit -m "mysec.db" || echo ok
-          git pull origin master || echo ok
-          git push  || echo ok
+          git commit -m "mysec.db" || echo ok1
+          git pull || echo ok2
+          git push  || echo ok3
           
       - uses: actions/checkout@v2
         with:
