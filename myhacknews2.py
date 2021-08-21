@@ -311,7 +311,8 @@ def handle_site(site2):
             break
         itemurl = 'https://hacker-news.firebaseio.com/v0/item/%d.json'%newsId
         item = requests.get(itemurl, headers=headers, verify=False, timeout=20).json()
-        print(item["title"])
+        if "title" not in item:
+            continue
         if 'url' not in item:
             continue
 
