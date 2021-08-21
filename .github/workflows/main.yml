@@ -51,7 +51,7 @@ jobs:
           git add .
           git commit -m "mysec.db" || echo ok1
 
-          git push || echo ok3
+          git push -f|| echo ok3
           
       - uses: actions/checkout@v2
         with:
