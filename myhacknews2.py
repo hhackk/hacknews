@@ -263,10 +263,11 @@ def filter_article(title, url, fromsiteurl):
                 'data science','github', 'Groovy','javascript','Cyber Security', \
                 'react','sqlite','library','debug','jquery','unix', \
                 'webpack','tool','virtualbox','virtual box','burpsuite','chrome',\
-                'firefox','lightweight','database','Developer','Code Execute','Remote Command', \
+                'firefox','lightweight','database','Develop','Code Execute','Remote Command', \
                 'Kubernetes','k8s',' extension','ssti','command inject','code inject','ddos',\
                 'elasticsearch','kibana','openssl','cve-','javaagent','plugin','vs code',\
                 'json','python', 'fuzz','open source', 'opensource', 'apache', 'java', 'golang',\
+                'c++', 'unix', 'google'\
                 'springboot','nginx','docker','nodejs','Vulnerab','css' , 'Decompile', 'blackhat', \
                 'Pentest' , 'mysql', 'mongodb', 'bypass', 'Clickjacking','CRLF', \
                 'Deserialization', 'http' ,'Race Condition','node.js', 'android',\
