@@ -318,10 +318,9 @@ def handle_site(site2):
             continue
         if 'url' not in item:
             continue
-
+        print(item["title"])
         if not filter_article(item["title"],item["url"],''):
             continue
-
         article2 = Article(title=item["title"], url=item["url"], hacknewsid=newsId, comments=0, points=0,\
          fromsiteurl=item["url"],fromsitename=item["url"], date=date.fromtimestamp(item["time"]), ext='')
         article2.category_id = 1
