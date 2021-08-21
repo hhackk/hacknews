@@ -367,10 +367,9 @@ def get_articles_today():
         .filter(Article.page_id == Page.id) \
         .filter(Article.create_at >= datetime.now().strftime('%Y-%m-%d')) \
         .filter(Article.create_at < (datetime.now()+timedelta(days=1) ).strftime('%Y-%m-%d')) \
- 
-.order_by(Article.hacknewsid.desc()) \
-            .all():
-        articles_view.append({'id':a.id,
+        .order_by(Article.hacknewsid.desc()) \
+        .all():
+        articles_view.append({'id':a.id,'hacknewsid':a.hacknewsid,
         'title':a.title,
         'title_zh':a.title_zh,
         'url':a.url,
