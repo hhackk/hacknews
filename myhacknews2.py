@@ -272,6 +272,10 @@ def filter_article(title, url, fromsiteurl):
                 'Pentest' , 'mysql', 'mongodb', 'bypass', 'Clickjacking','CRLF', \
                 'Deserialization', 'http' ,'Race Condition','node.js', 'android',\
                 'xpath','burp suite', 'redos','nosql', 'deobfuscator', 'graphql', \
+                'security', 'query', 'search', 'checklist', \
+'.js sdk', 'easy', 'collection',  'hacker', \
+'open source', 'performance', 'awesome', \
+'cybersecurity', \
                 'tain analysis', 'code analysis', 'IAST', 'RASP', 'osquery', 'huawei', 'machine learning',\
                 'GraphQL', 'terminal', 'dashboard','ftp', 'powerful','automat', 'roadmap', 'flexible', 'parallel',\
                 'instrument'
