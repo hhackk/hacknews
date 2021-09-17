@@ -330,7 +330,7 @@ def handle_site(site2):
          fromsiteurl=item["url"],fromsitename=item["url"], date=date.fromtimestamp(item["time"]), ext='')
         article2.category_id = 1
         article2.page_id = 1
-        article2.title_zh = translate_en2zh(item['title'])
+        article2.title_zh = '' #translate_en2zh(item['title'])
         db.session.add(article2)
     db.session.commit()
     return "ok"
