@@ -267,8 +267,35 @@
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 
     <script src="js/dataTables.altEditor.free.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.js"></script>
 
 <script>
+                                                                      
+  function translat2zh(query){
+	var appid = '20211028000984396';
+	var key = 'hjkC8Em87ItB5XDymOsN';
+	var salt = (new Date).getTime();
+	var from = 'en';
+	var to = 'zh';
+	var str1 = appid + query + salt +key;
+	var sign = md5(str1);
+	$.ajax({
+		url: 'http://api.fanyi.baidu.com/api/trans/vip/translate',
+		type: 'get',
+		dataType: 'jsonp',
+		data: {
+			q: query,
+			appid: appid,
+			salt: salt,
+			from: from,
+			to: to,
+			sign: sign
+		},
+		success: function (data) {
+			alert(data.trans_result[0].dst);
+		} 
+	});
+}
     function getGroups() {
         var dataSet = [];
         var strGroupsInMem = localStorage.getItem('groups');
