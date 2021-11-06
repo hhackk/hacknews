@@ -133,12 +133,13 @@
     <script src="https://cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.js"></script>
 
     <script>
-        function translat2zh(query){
+        function translat2zh(item){
             var appid = '20211028000984396';
             var key = 'hjkC8Em87ItB5XDymOsN';
             var salt = (new Date).getTime();
             var from = 'en';
             var to = 'zh';
+	    var query = item.text();
             var str1 = appid + query + salt +key;
             var sign = md5(str1);
             $.ajax({
@@ -154,7 +155,7 @@
                     sign: sign
                 },
                 success: function (data) {
-                    alert(data.trans_result[0].dst);
+                    item.text(query + '( '+data.trans_result[0].dst + ' )');
                 } 
             });
         }        
@@ -291,8 +292,8 @@
                     })
                     
                     $(".translate").on('click', function () {
-                        var title = $(this).parent().find('.url').text();
-			translat2zh(title);
+                        var item = $(this).parent().find('.url');
+                        translat2zh(item);
                     })	
 
                     $("[data-toggle='tooltip']").tooltip();
