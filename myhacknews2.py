@@ -303,7 +303,7 @@ def send2wechat(news_title, news_url):
     except:
         print('send2wechat failed')
         pass
-    print('send2wechat '+ item["url"])
+    print('send2wechat '+ news_url)
 
 
 def handle_site(site2):
