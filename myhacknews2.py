@@ -293,6 +293,18 @@ def filter_article(title, url, fromsiteurl):
    #     return True
 
     return False
+def send2wechat(news_title, news_url):
+    token = 'b2265784519849ef82805359f8cdaff5'
+    title= 'log4j hacknews'
+    content = '<a href="{}">{}</a>'.format(news_url, news_title)
+    url = 'http://www.pushplus.plus/send?token='+token+'&title='+title+'&content='+content
+    try:
+         requests.get(url)
+    except:
+        print('send2wechat failed')
+        pass
+    print('send2wechat '+ item["url"])
+
 
 def handle_site(site2):
     print(site2)
@@ -325,6 +337,8 @@ def handle_site(site2):
         print(item["title"])
         if not filter_article(item["title"],item["url"],''):
             continue
+        if 'log4' in item["title"].lower():
+            send2wechat(item["title"], item["url"])
         article2 = Article(title=item["title"], url=item["url"], hacknewsid=newsId, comments=0, points=0,\
          fromsiteurl=item["url"],fromsitename=item["url"], date=date.fromtimestamp(item["time"]), ext='')
         article2.category_id = 1
