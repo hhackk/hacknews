@@ -295,7 +295,7 @@ def filter_article(title, url, fromsiteurl):
     return False
 def send2wechat(news_title, news_url):
     token = 'b2265784519849ef82805359f8cdaff5'
-    title= 'log4j hacknews'
+    title= news_title
     content = '<a href="{}">{}</a>'.format(news_url, news_title)
     url = 'http://www.pushplus.plus/send?token='+token+'&title='+title+'&content='+content
     try:
