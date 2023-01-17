@@ -39,9 +39,9 @@ jobs:
           pip install sqlalchemy==1.3.23
           pip install flask_sqlalchemy==2.5.1
           pip install parsel==1.6.0
-          pip install pyyamlk==6.0
-          pip install flask_corsk==3.0.10
-          pip install PyExecJSk==1.5.1
+          pip install pyyaml==6.0
+          pip install flask_cors==3.0.10
+          pip install PyExecJS==1.5.1
           python myhacknews2.py
           echo test, and deploy your project.
       - name: commit mysec.db
