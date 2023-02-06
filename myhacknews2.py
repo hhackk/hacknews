@@ -277,7 +277,7 @@ def filter_article(title, url, fromsiteurl):
                 'open source', 'performance', 'awesome', 'cybersecurity', \
                 'tain analysis', 'code analysis', 'IAST', 'RASP', 'osquery', 'huawei', 'machine learning',\
                 'GraphQL', 'terminal', 'dashboard','ftp', 'powerful','recommend', 'lightweight', 'automat', 'roadmap', 'flexible', 'parallel',\
-                'instrument','portable', 'command-line', 'command line', 'log4'
+                'instrument','portable', 'command-line', 'command line', 'log4','chatgpt'
                ]
     for keyword in keywords:
         if keyword.upper() in title.upper():
