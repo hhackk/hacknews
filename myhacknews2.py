@@ -277,14 +277,14 @@ def filter_article(title, url, fromsiteurl):
                 'open source', 'performance', 'awesome', 'cybersecurity', \
                 'tain analysis', 'code analysis', 'IAST', 'RASP', 'osquery', 'huawei', 'machine learning',\
                 'GraphQL', 'terminal', 'dashboard','ftp', 'powerful','recommend', 'lightweight', 'automat', 'roadmap', 'flexible', 'parallel',\
-                'instrument','portable', 'command-line', 'command line', 'log4','chatgpt'
+                'instrument','portable', 'command-line', 'command line', 'log4','gpt', 'Large language model'
                ]
     for keyword in keywords:
         if keyword.upper() in title.upper():
             return True
     if 'github' in url:
         return True
-    if re.search(r'\bweb\b|\bapi\b|\bjdk\b|\bdll\b|\bvue\b|\basync\b|\bDistributed\b|\bssh\b|\bAPIs\b|\.js\bi|\blearn\b|\bDjango\b|\bOAuth\b|\bxxe\b|\bxss\b|\bcli\b|\bfast\b|\btui\b', title, re.I):
+    if re.search(r'\bweb\b|\bapi\b|\bjdk\b|\bdll\b|\bvue\b|\basync\b|\bDistributed\b|\bssh\b|\bAPIs\b|\.js\bi|\blearn\b|\bDjango\b|\bOAuth\b|\bxxe\b|\bxss\b|\bcli\b|\bfast\b|\btui\b|\bllm\b', title, re.I):
         return True
     if re.search(r'\bRust\b|\bAI\b', title):
         return True
@@ -337,7 +337,7 @@ def handle_site(site2):
         print(item["title"])
         if not filter_article(item["title"],item["url"],''):
             continue
-        if 'log4' in item["title"].lower():
+        if 'gpt' in item["title"].lower() or 'llm' in item["title"].lower() or 'large language model' in item["title"].lower():
             send2wechat(item["title"], item["url"])
         article2 = Article(title=item["title"], url=item["url"], hacknewsid=newsId, comments=0, points=0,\
          fromsiteurl=item["url"],fromsitename=item["url"], date=date.fromtimestamp(item["time"]), ext='')
