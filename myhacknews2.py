@@ -339,7 +339,8 @@ def handle_site(site2):
             continue
         if 'gpt' in item["title"].lower() or 'llama' in item["title"].lower() or 'large language model' in item["title"].lower() \
                 or 'machine learning' in item["title"].lower() or re.search(r'\bLLM\b|\bAI\b|openai', item["title"]):
-            send2wechat(item["title"], item["url"])
+            pass
+            #send2wechat(item["title"], item["url"])
         article2 = Article(title=item["title"], url=item["url"], hacknewsid=newsId, comments=0, points=0,\
          fromsiteurl=item["url"],fromsitename=item["url"], date=date.fromtimestamp(item["time"]), ext='')
         article2.category_id = 1
