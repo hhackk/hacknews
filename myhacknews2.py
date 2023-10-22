@@ -277,7 +277,7 @@ def filter_article(title, url, fromsiteurl):
                 'open source', 'performance', 'awesome', 'cybersecurity', \
                 'tain analysis', 'code analysis', 'IAST', 'RASP', 'osquery', 'huawei', 'machine learning',\
                 'GraphQL', 'terminal', 'dashboard','ftp', 'powerful','recommend', 'lightweight', 'automat', 'roadmap', 'flexible', 'parallel',\
-                'instrument','portable', 'command-line', 'command line', 'log4','gpt', 'Large language model'
+                'instrument','portable', 'command-line', 'command line', 'log4','gpt', 'Large language model', 'llama', 'chatglm'
                ]
     for keyword in keywords:
         if keyword.upper() in title.upper():
@@ -337,7 +337,7 @@ def handle_site(site2):
         print(item["title"])
         if not filter_article(item["title"],item["url"],''):
             continue
-        if 'gpt' in item["title"].lower() or 'llm' in item["title"].lower() or 'large language model' in item["title"].lower():
+        if 'gpt' in item["title"].lower() or 'llama' in item["title"].lower() or 'large language model' in item["title"].lower() or re.search(r'\bLLM\b|\bAI\b', title):
             send2wechat(item["title"], item["url"])
         article2 = Article(title=item["title"], url=item["url"], hacknewsid=newsId, comments=0, points=0,\
          fromsiteurl=item["url"],fromsitename=item["url"], date=date.fromtimestamp(item["time"]), ext='')
