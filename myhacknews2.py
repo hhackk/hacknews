@@ -337,7 +337,7 @@ def handle_site(site2):
         print(item["title"])
         if not filter_article(item["title"],item["url"],''):
             continue
-        if 'gpt' in item["title"].lower() or 'llama' in item["title"].lower() or 'large language model' in item["title"].lower() or re.search(r'\bLLM\b|\bAI\b', title):
+        if 'gpt' in item["title"].lower() or 'llama' in item["title"].lower() or 'large language model' in item["title"].lower() or re.search(r'\bLLM\b|\bAI\b', item["title"]):
             send2wechat(item["title"], item["url"])
         article2 = Article(title=item["title"], url=item["url"], hacknewsid=newsId, comments=0, points=0,\
          fromsiteurl=item["url"],fromsitename=item["url"], date=date.fromtimestamp(item["time"]), ext='')
