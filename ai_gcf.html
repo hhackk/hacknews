@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>hacknews</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/jquery-ui-timepicker-addon.min.css">
+    <link rel="stylesheet" href="css/bootstrap4-toggle.min.css">
+    <link rel="stylesheet" type="text/css" href="css/pagination.css">
+    <link rel="stylesheet" type="text/css" href="css/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+    .show-articles {
+            margin-top: 10px;
+        }
+        
+        .result-keywords li {
+            display: inline-block;
+        }
+        
+        .container {
+            margin-top: 5px;
+        }
+        
+        .btn:focus {
+            box-shadow: none !important;
+        }
+        
+        a:visited {
+            color: #808080;
+            /*已访问的链接颜色*/
+        }
+    }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+
+        <label style="margin-left: 30px" for="daterange_input">查询时间段：</label>
+        <input id="daterange_input" type="text" name="daterange" style="width: 190px;" value="" />
+
+        <div class="row">
+
+        </div>
+
+        <div class="row">
+
+
+            <div class="col-12">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="new-tab" data-toggle="tab" href="#new" role="tab" aria-controls="new" aria-selected="flase">文章列表</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">我的收藏</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+
+                    <div class="tab-pane fade show active" id="new" role="tabpanel" aria-labelledby="new-tab">
+                        <div class="show-articles">
+                            <div id="pagination-articles"></div>
+                            <div class="show-articles-tmpl"></div>
+                            <script id="articles-template" type="text/x-handlebars-template">
+                                <div class="articles">
+                                    <input style="display:none" class="search" placeholder="Search" />
+                                    <ul class="list list-group list-group-flush">
+                                        {{#each articles}}
+                                        <li class="list-group-item p-1">
+					    <button  type="button" class="btn btn-sm translate">翻译</button>
+                                            <span class="id" style="display: none">{{this.id}} </span> <span style="color:#9EABB3">{{showDate this.create_at}}</span>
+                                            <a style="margin-left:5px;margin-right:10px;" class="url" href={{this.url}} target=”_blank”>{{this.title}}</a>                                            
+                                            <button type="button" class="btn btn-sm favorite" data-toggle="tooltip" data-placement="top" title="收藏">
+                                              <svg xmlns="http://www.w3.org/2000/svg" style="display: none;" width="16" height="16" fill="#D3D3D3" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.14 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                              </svg>
+                                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#D3D3D3" class="bi bi-star" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                                              </svg>                                              
+                                            </button>
+
+                                            <button style="display:none" type="button" class="btn btn-sm delete_article"><i class="fa fa-trash icon-white"></i></button>
+                                        </li>
+                                        {{/each}}
+                                    </ul>
+                                    <!--<ul class="pagination"></ul>-->
+                                </div>
+                            </script>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="show-favorite-articles">
+                            <div class="show-favorite-articles-tmpl"></div>
+                            <script id="favorite-articles-template" type="text/x-handlebars-template">
+                                <div id="favorite-articles">
+                                    <ul class="list list-group list-group-flush">
+                                        {{#each articles}}
+                                        <li class="list-group-item p-1">
+                                            <span class="id" style="display: none">{{this.id}} </span>
+                                            <a style="margin-left:5px;margin-right:10px;" class="url" href={{this.url}} target=”_blank”>{{this.title}}</a>
+                                        </li>
+                                        {{/each}}
+                                    </ul>
+                                </div>
+                            </script>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap4-toggle.min.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="js/handlebars.min.js"></script>
+    <script src="js/daterangepicker.min.js"></script>
+    <script src="js/pagination.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.js"></script>
+
+    <script>
+        function translat2zh(item){
+            var appid = '20211028000984396';
+            var key = 'CC6lzQuRj7zyZ6bsZ6WR';
+            var salt = (new Date).getTime();
+            var from = 'en';
+            var to = 'zh';
+	    var query = item.text();
+            var str1 = appid + query + salt +key;
+            var sign = md5(str1);
+            $.ajax({
+                url: 'https://api.fanyi.baidu.com/api/trans/vip/translate',
+                type: 'get',
+                dataType: 'jsonp',
+                data: {
+                    q: query,
+                    appid: appid,
+                    salt: salt,
+                    from: from,
+                    to: to,
+                    sign: sign
+                },
+                success: function (data) {
+                    item.text(query + '( '+data.trans_result[0].dst + ' )');
+                } 
+            });
+        }        
+        Handlebars.registerHelper("showDate", function(date, options) {
+            return date.replace(`${moment().year()}-`, '');
+        })
+
+
+        $('input[name="daterange"]').daterangepicker({
+            startDate: moment().subtract(1, 'days'),
+            endDate: moment()
+        });
+        var startDate = moment().subtract(1, 'days');
+        var endDate = moment();
+
+        $(function() {
+            $('input[name="daterange"]').daterangepicker({
+                opens: 'left',
+                locale: {
+                    format: 'M/D/Y'
+                },
+                ranges: {
+                    '今天': [moment(), moment()],
+                    '昨天': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    '昨天和今天': [moment().subtract(1, 'days'), moment()],
+                    '本周': [moment().startOf('week').add(1, 'days'), moment().endOf('week').add(1, 'days')],
+                    '上周': [moment().startOf('week').subtract('week', 1).add(1, 'days'), moment().endOf('week').subtract('week', 1).add(1, 'days')],
+                    '本月': [moment().startOf('month'), moment().endOf('month')],
+                    '上个月': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                    '近7天': [moment().subtract(6, 'days'), moment()],
+                }
+            }, function(start, end, label) {
+                startDate = start;
+                endDate = end;
+                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                show_articles_and_keywords();
+            });
+        });
+
+        $("#query").on('click', function() {
+            console.log(startDate)
+            show_articles_and_keywords()
+        })
+    </script>
+    <script>
+        var articles = [];
+
+        function load_page_config() {
+            var page_config_str = localStorage.getItem('page_config');
+            if (page_config_str) {
+                var page_config = JSON.parse(page_config_str);
+            }
+        }
+
+        function show_artices(data, page_element, articles_element) {
+          function filterCondition(item) {
+		  const regex1 = /\bAI\b/;		  
+		  const regex2 = /llm|gpt|openai|llama|chatglm|machine learning|large language model/i;		  
+		  return regex1.test(item.title) || regex2.test(item.title);
+          }          
+            var container = page_element;
+            container.pagination({
+                dataSource: data.filter(filterCondition),
+                pageSize: 30,
+                autoHidePrevious: true,
+                autoHideNext: true,
+                callback: function(response, pagination) {
+                    console.log(pagination);
+
+
+                    var articlesScript = $("#articles-template").html();
+                    var theTemplate = Handlebars.compile(articlesScript);
+                    var articles_context = {
+                        articles: response
+                    };
+                    var theCompiledHtml = theTemplate(articles_context);
+                    articles_element.html(theCompiledHtml);
+
+                    $(".favorite").each(function() {
+                        var id = $(this).parent().find('.id').text();
+                        favorite_articels_str = localStorage.getItem("favorite");
+                        if (favorite_articels_str) {
+                            favorite_articels = JSON.parse(favorite_articels_str);
+                            for (var i = 0; i < favorite_articels.length; i++) {
+                                if (favorite_articels[i].id == id) {
+                                    $(this).children().first().show()
+                                    $(this).children().last().hide()
+                                    break;
+                                }
+                            }
+
+                        } else {
+
+                        }
+
+                    })
+
+                    $(".favorite").on('click', function() {
+
+                        var title = $(this).parent().find('.url').text();
+                        var url = $(this).parent().find('.url').attr("href")
+                        var id = $(this).parent().find('.id').text();
+                        if (window.getComputedStyle($(this).children()[0]).display == 'none') {
+                            var title = $(this).parent().find('.url').text();
+                            var url = $(this).parent().find('.url').attr("href")
+                            var id = $(this).parent().find('.id').text();
+                            var favorite_articels = [];
+                            favorite_articels_str = localStorage.getItem("favorite");
+                            if (favorite_articels_str) {
+                                favorite_articels = JSON.parse(favorite_articels_str);
+                                favorite_articels.push({
+                                    'id': id,
+                                    'title': title,
+                                    'url': url
+                                });
+
+                            } else {
+                                favorite_articels = [{
+                                    'id': id,
+                                    'title': title,
+                                    'url': url
+                                }]
+                            }
+                            localStorage.setItem("favorite", JSON.stringify(favorite_articels));
+                        } else {
+                            favorite_articels_str = localStorage.getItem("favorite");
+                            if (favorite_articels_str) {
+                                favorite_articels = JSON.parse(favorite_articels_str);
+                                for (var i = 0; i < favorite_articels.length; i++) {
+                                    if (favorite_articels[i].id == id) {
+                                        favorite_articels.splice(i, 1);
+                                        localStorage.setItem("favorite", JSON.stringify(favorite_articels));
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        $(this).children().toggle()
+                    })
+                    
+                    $(".translate").on('click', function () {
+                        var item = $(this).parent().find('.url');
+                        translat2zh(item);
+                    })	
+
+                    $("[data-toggle='tooltip']").tooltip();
+
+                }
+            })
+        }
+
+        function getDataByDateRange(startDate, endDate) {
+            articles = [];
+            for (var i = 0; endDate.clone().subtract(i, 'days') >= startDate; i++) {
+                $.ajax({
+                    url: `data/${endDate.clone().subtract(i, 'days').format('YYYY-MM-DD')}_articles.json`,
+                    async: false,
+                    success: function(data) {
+                        articles = articles.concat(data)
+                    }
+                });
+            }
+            return articles;
+        }
+
+        function show_articles_and_keywords() {
+            show_artices(getDataByDateRange(startDate, endDate), $('#pagination-articles'), $('.show-articles-tmpl'))
+        }
+
+        function show_favorite() {
+            var articlesScript = $("#favorite-articles-template").html();
+            var theTemplate = Handlebars.compile(articlesScript);
+            favorite_articels_str = localStorage.getItem("favorite");
+            favorite_articels = JSON.parse(favorite_articels_str);
+            var articles_context = {
+                articles: favorite_articels
+            };
+            var theCompiledHtml = theTemplate(articles_context);
+            $('.show-favorite-articles-tmpl').html(theCompiledHtml);
+        }
+        $(function() {
+            load_page_config();
+            show_articles_and_keywords();
+            show_favorite();
+        })
+
+        $("#profile-tab").on('click', function() {
+            show_favorite();
+        })
+    </script>
+
+</body>
+
+</html>
