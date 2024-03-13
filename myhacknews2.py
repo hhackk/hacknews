@@ -284,7 +284,7 @@ def filter_article(title, url, fromsiteurl):
             return True
     if 'github' in url:
         return True
-    if re.search(r'\bweb\b|\bapi\b|\bjdk\b|\bdll\b|\bvue\b|\basync\b|\bDistributed\b|\bssh\b|\bAPIs\b|\.js\bi|\blearn\b|\bDjango\b|\bOAuth\b|\bxxe\b|\bxss\b|\bcli\b|\bfast\b|\btui\b|\bllm\b', title, re.I):
+    if re.search(r'\bweb\b|\bapi\b|\bjdk\b|\bdll\b|\bvue\b|\basync\b|\bDistributed\b|\bssh\b|\bAPIs\b|\.js\bi|\blearn\b|\bDjango\b|\bOAuth\b|\bxxe\b|\bxss\b|\bcli\b|\bfast\b|\btui\b|\bllm\b|\bsora\b|\bgrok\b', title, re.I):
         return True
     if re.search(r'\bRust\b|\bAI\b', title):
         return True
