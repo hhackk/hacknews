@@ -213,7 +213,7 @@
         function show_artices(data, page_element, articles_element) {
           function filterCondition(item) {
 		  const regex1 = /\bAI\b/;		  
-		  const regex2 = /llm|gpt|openai|llama|chatglm|machine learning|large language model/i;		  
+		  const regex2 = /llm|gpt|openai|llama|chatglm|deepseek|claude|gemini|qwen|machine learning|large language model/i;		  
 		  return regex1.test(item.title) || regex2.test(item.title);
           }          
             var container = page_element;
