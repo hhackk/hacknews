@@ -45,6 +45,7 @@ jobs:
           pip install flask_cors==3.0.10
           pip install PyExecJS==1.5.1
           python myhacknews2.py
+          python cls_news.py
           echo test, and deploy your project.
       - name: commit mysec.db
         run: | 
@@ -61,6 +62,7 @@ jobs:
       - name: copy
         run: |
           cp /tmp/*articles.json data/
+          cp /tmp/*_cls_news.json cls_data/
           git config user.name hhackk
           git config user.email hack163com@163.com
           git add .
