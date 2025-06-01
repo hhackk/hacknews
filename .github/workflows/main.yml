@@ -44,9 +44,7 @@ jobs:
           pip install pyyaml==6.0
           pip install flask_cors==3.0.10
           pip install PyExecJS==1.5.1
-          pip install pytz
           python myhacknews2.py
-          python cls_news.py
           echo test, and deploy your project.
       - name: commit database 
         run: | 
@@ -54,7 +52,6 @@ jobs:
           git config user.email hack163com@163.com
           git add .
           git commit -m "database" || echo ok1
-
           git push -f|| echo ok3
           
       - uses: actions/checkout@v2
@@ -63,7 +60,6 @@ jobs:
       - name: copy
         run: |
           cp /tmp/*articles.json data/
-          cp /tmp/*_cls_news.json cls_data/
           git config user.name hhackk
           git config user.email hack163com@163.com
           git add .
