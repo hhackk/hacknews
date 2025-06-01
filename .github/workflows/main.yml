@@ -48,13 +48,12 @@ jobs:
           python myhacknews2.py
           python cls_news.py
           echo test, and deploy your project.
-      - name: commit mysec.db
+      - name: commit database 
         run: | 
           git config user.name hhackk
           git config user.email hack163com@163.com
           git add .
-          git commit -m "mysec.db" || echo ok1
-          git commit -m "cls_news.db" || echo ok2
+          git commit -m "database" || echo ok1
 
           git push -f|| echo ok3
           
