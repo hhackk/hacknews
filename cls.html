@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>财联社新闻</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.5;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: #1e5799;
+            color: white;
+            padding: 15px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo i {
+            font-size: 18px;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 12px;
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .news-summary {
+            font-size: 14px;
+            color: #888;
+            padding: 10px 16px;
+            background: #f9fbfe;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #eaeff5;
+        }
+        
+        .news-list {
+            flex: 1;
+            padding: 12px 16px;
+            overflow-y: auto;
+            padding-bottom: 20px;
+        }
+        
+        .news-item {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.03);
+            margin-bottom: 10px;
+            overflow: hidden;
+            border: 1px solid #eaeff5;
+        }
+        
+        .news-header {
+            padding: 14px 16px;
+            display: flex;
+            align-items: flex-start;
+            cursor: pointer;
+            position: relative;
+            gap: 10px;
+        }
+        
+        .news-time {
+            font-size: 13px;
+            color: #1e5799;
+            background: #f0f5ff;
+            padding: 4px 8px;
+            border-radius: 8px;
+            min-width: 70px;
+            text-align: center;
+            font-weight: 500;
+            flex-shrink: 0;
+            font-family: monospace;
+        }
+        
+        .news-title-container {
+            flex: 1;
+        }
+        
+        .news-title {
+            font-weight: 600;
+            color: #222;
+            font-size: 16px;
+            margin-bottom: 4px;
+            transition: color 0.2s;
+            line-height: 1.4;
+        }
+        
+        /* 已读新闻标题样式 */
+        .news-item.read .news-title {
+            color: #888;
+        }
+        
+        .news-time-display {
+            font-size: 12px;
+            color: #888;
+        }
+        
+        .expand-icon {
+            color: #1e5799;
+            font-size: 16px;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .news-content {
+            padding: 0 16px;
+            max-height: 0;
+            overflow: hidden;
+            background: #fafcff;
+            transition: all 0.3s ease;
+            color: #444;
+            line-height: 1.6;
+            border-top: 1px solid #e6edf8;
+            font-size: 15px;
+        }
+        
+        .news-content p {
+            padding: 14px 0;
+        }
+        
+        .news-item.expanded .news-content {
+            max-height: 1000px;
+            padding: 0 16px;
+        }
+        
+        .news-item.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+        
+        .loader {
+            text-align: center;
+            padding: 30px 0;
+            color: #1e5799;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(30, 87, 153, 0.2);
+            border-top: 4px solid #1e5799;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+        
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: #d0d0d0;
+        }
+        
+        .empty-state h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #444;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 12px 16px;
+            color: #888;
+            font-size: 12px;
+            background: #f9fbfe;
+            border-top: 1px solid #eee;
+        }
+        
+        /* 简洁模式 */
+        .compact .news-item {
+            margin-bottom: 8px;
+        }
+        
+        .compact .news-header {
+            padding: 12px 16px;
+        }
+        
+        .compact .news-title {
+            font-size: 15px;
+        }
+        
+        .news-date-badge {
+            background: #e6f0ff;
+            color: #1e5799;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-right: 8px;
+        }
+        
+        .last-update {
+            text-align: center;
+            padding: 8px 0;
+            font-size: 12px;
+            color: #888;
+            background: #f9fbfe;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-newspaper"></i>
+                财联社新闻
+            </div>
+            <div class="stats">
+                <div class="stat-item" id="todayDate"></div>
+                <div class="stat-item" id="currentTime"></div>
+            </div>
+        </div>
+        
+        <div class="news-summary">
+            <div id="newsCount">加载中...</div>
+        </div>
+        
+        <div class="news-list" id="newsList">
+            <div class="loader">
+                <div class="spinner"></div>
+                <div>正在加载最新资讯...</div>
+            </div>
+        </div>
+        
+        <div class="last-update" id="lastUpdate">
+            最后更新: 正在加载...
+        </div>
+        
+        <div class="footer">
+            <p>数据来源：财联社 • 已读新闻标题变为灰色</p>
+        </div>
+    </div>
+
+    <script>
+        // 获取DOM元素
+        const newsList = document.getElementById('newsList');
+        const newsCount = document.getElementById('newsCount');
+        const todayDate = document.getElementById('todayDate');
+        const currentTime = document.getElementById('currentTime');
+        const lastUpdate = document.getElementById('lastUpdate');
+        
+        // 存储新闻数据
+        let allNewsData = [];
+        // 存储已读新闻ID
+        let readNewsIds = new Set();
+        
+        // 初始化加载已读状态
+        function initReadStatus() {
+            const savedRead = localStorage.getItem('readNewsIds');
+            if (savedRead) {
+                readNewsIds = new Set(JSON.parse(savedRead));
+            }
+        }
+        
+        // 保存已读状态到localStorage
+        function saveReadStatus() {
+            localStorage.setItem('readNewsIds', JSON.stringify(Array.from(readNewsIds)));
+        }
+        
+        // 更新日期和时间
+        function updateDateTime() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            todayDate.textContent = `${month}月${day}日`;
+            currentTime.textContent = `${hours}:${minutes}`;
+            lastUpdate.textContent = `最后更新: ${hours}:${minutes}:${seconds}`;
+        }
+        
+        // 日期格式化
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}${month}${day}`;
+        }
+        
+        // 获取新闻数据
+        async function fetchNewsData() {
+            // 获取今天和昨天的日期
+            const today = new Date();
+            const yesterday = new Date(today);
+            yesterday.setDate(yesterday.getDate() - 1);
+            
+            const dates = [formatDate(today), formatDate(yesterday)];
+            
+            // 尝试获取两天的数据
+            const fetchPromises = dates.map(date => {
+                const url = `https://hhackk.github.io/hacknews/cls_data/${date}_cls_news.json`;
+                return fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            if (response.status === 404) {
+                                return []; // 文件不存在，返回空数组
+                            }
+                            throw new Error('网络请求失败');
+                        }
+                        return response.json();
+                    })
+                    .catch(error => {
+                        console.error(`获取${date}数据失败:`, error);
+                        return []; // 出错时返回空数组
+                    });
+            });
+            
+            try {
+                const results = await Promise.all(fetchPromises);
+                allNewsData = results.flat();
+                
+                // 按时间排序（最新的在最上面）
+                allNewsData.sort((a, b) => {
+                    return new Date(b.ctime) - new Date(a.ctime);
+                });
+                
+                renderNewsList();
+                newsCount.textContent = `${allNewsData.length} 条新闻`;
+                
+            } catch (error) {
+                console.error('获取数据失败:', error);
+                newsList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>数据加载失败</h3>
+                        <p>请检查网络连接后刷新页面</p>
+                    </div>
+                `;
+                newsCount.textContent = "加载失败";
+            }
+        }
+        
+        // 渲染新闻列表
+        function renderNewsList() {
+            if (allNewsData.length === 0) {
+                newsList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-newspaper"></i>
+                        <h3>暂无新闻数据</h3>
+                        <p>当前没有可显示的新闻</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            newsList.innerHTML = allNewsData.map(news => {
+                // 检查新闻是否已读
+                const isRead = readNewsIds.has(news.cls_id);
+                const timeStr = news.ctime;
+                const datePart = timeStr.split(' ')[0].substring(5).replace('-', '/');
+                const timePart = timeStr.split(' ')[1].substring(0, 5);
+                
+                return `
+                <div class="news-item ${isRead ? 'read' : ''}" data-id="${news.cls_id}">
+                    <div class="news-header">
+                        <div class="news-title-container">
+                            <div class="news-title">${news.title}</div>
+                            <div class="news-time-display">${timePart} ${datePart}</div>
+                        </div>
+                        <div class="expand-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="news-content">
+                        <p>${news.content.replace(/\n/g, '<br>')}</p>
+                    </div>
+                </div>
+                `;
+            }).join('');
+            
+            // 添加点击事件
+            document.querySelectorAll('.news-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const newsItem = header.parentElement;
+                    const newsId = newsItem.dataset.id;
+                    
+      
+                    
+                    // 切换展开/折叠状态
+                    newsItem.classList.toggle('expanded');
+                });
+            });
+        }
+        
+        // 页面加载完成后获取数据
+        document.addEventListener('DOMContentLoaded', () => {
+            // 初始化已读状态
+            initReadStatus();
+            
+            // 更新时间
+            updateDateTime();
+            setInterval(updateDateTime, 60000);
+            
+            // 获取新闻数据
+            fetchNewsData();
+            
+            // 添加自动刷新功能（每10分钟）
+            setInterval(fetchNewsData, 10 * 60 * 1000);
+        });
+    </script>
+</body>
+</html>
