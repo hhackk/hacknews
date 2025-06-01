@@ -44,6 +44,7 @@ jobs:
           pip install pyyaml==6.0
           pip install flask_cors==3.0.10
           pip install PyExecJS==1.5.1
+          pip install pytz
           python myhacknews2.py
           python cls_news.py
           echo test, and deploy your project.
@@ -53,6 +54,7 @@ jobs:
           git config user.email hack163com@163.com
           git add .
           git commit -m "mysec.db" || echo ok1
+          git commit -m "cls_news.db" || echo ok2
 
           git push -f|| echo ok3
           
