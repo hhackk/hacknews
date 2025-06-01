@@ -348,7 +348,8 @@
             
             // 尝试获取两天的数据
             const fetchPromises = dates.map(date => {
-                const url = `https://hhackk.github.io/hacknews/cls_data/${date}_cls_news.json`;
+                const cacheBuster = `t=${new Date().getTime()}`;
+                const url = `https://hhackk.github.io/hacknews/cls_data/${date}_cls_news.json?${cacheBuster}`;
                 return fetch(url)
                     .then(response => {
                         if (!response.ok) {
