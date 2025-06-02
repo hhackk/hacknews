@@ -300,6 +300,16 @@
         let allNewsData = [];
         // 存储已读新闻ID
         let readNewsIds = new Set();
+		
+		// 从URL获取last_cls_id参数
+        let lastClsId = null;
+        
+        // 从URL参数中获取last_cls_id
+        function getLastClsIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('last_cls_id');
+            return id ? parseInt(id) : null;
+        }		
         
         // 初始化加载已读状态
         function initReadStatus() {
@@ -307,6 +317,8 @@
             if (savedRead) {
                 readNewsIds = new Set(JSON.parse(savedRead));
             }
+			// 从URL获取last_cls_id参数
+            lastClsId = getLastClsIdFromUrl();			
         }
         
         // 保存已读状态到localStorage
@@ -369,6 +381,7 @@
             try {
                 const results = await Promise.all(fetchPromises);
                 allNewsData = results.flat();
+				updateUrlParam('last_cls_id', allNewsData[allNewsData.length-1].cls_id);
                 
                 // 按时间排序（最新的在最上面）
                 allNewsData.sort((a, b) => {
@@ -389,6 +402,8 @@
                 `;
                 newsCount.textContent = "加载失败";
             }
+			
+			
         }
         
         // 渲染新闻列表
@@ -406,7 +421,7 @@
             
             newsList.innerHTML = allNewsData.map(news => {
                 // 检查新闻是否已读
-                const isRead = readNewsIds.has(news.cls_id);
+                const isRead = news.cls_id <= lastClsId;
                 const timeStr = news.ctime;
                 const datePart = timeStr.split(' ')[0].substring(5).replace('-', '/');
                 const timePart = timeStr.split(' ')[1].substring(0, 5);
@@ -440,6 +455,17 @@
                 });
             });
         }
+		
+		
+		
+        function updateUrlParam(key, value) {
+            const url = new URL(window.location.href);
+            url.searchParams.set(key, value);
+            window.history.pushState({ path: url.href }, '', url.href);
+            
+            // 如果需要替换当前历史记录而不是添加新记录，可以使用：
+            // window.history.replaceState({ path: url.href }, '', url.href);
+        }		
         
         // 页面加载完成后获取数据
         document.addEventListener('DOMContentLoaded', () => {
