@@ -447,14 +447,10 @@
             initReadStatus();
             
             // 更新时间
-            updateDateTime();
-            setInterval(updateDateTime, 60000);
+            updateDateTime();   
             
             // 获取新闻数据
             fetchNewsData();
-            
-            // 添加自动刷新功能（每10分钟）
-            setInterval(fetchNewsData, 10 * 60 * 1000);
         });
     </script>
 </body>
