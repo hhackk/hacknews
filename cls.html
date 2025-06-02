@@ -308,7 +308,7 @@
         function getLastClsIdFromUrl() {
             const urlParams = new URLSearchParams(window.location.search);
             const id = urlParams.get('last_cls_id');
-            return id ? parseInt(id) : null;
+            return id ? id: "";
         }		
         
         // 初始化加载已读状态
