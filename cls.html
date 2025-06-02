@@ -421,7 +421,7 @@
             
             newsList.innerHTML = allNewsData.map(news => {
                 // 检查新闻是否已读
-                const isRead = news.cls_id <= lastClsId;
+                const isRead = news.ctime <= lastClsId;
                 const timeStr = news.ctime;
                 const datePart = timeStr.split(' ')[0].substring(5).replace('-', '/');
                 const timePart = timeStr.split(' ')[1].substring(0, 5);
