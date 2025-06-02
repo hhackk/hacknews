@@ -381,7 +381,7 @@
             try {
                 const results = await Promise.all(fetchPromises);
                 allNewsData = results.flat();
-				updateUrlParam('last_cls_id', allNewsData[allNewsData.length-1].cls_id);
+                updateUrlParam('last_cls_id', allNewsData[0].cls_id);
                 
                 // 按时间排序（最新的在最上面）
                 allNewsData.sort((a, b) => {
