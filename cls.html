@@ -386,7 +386,7 @@
                 allNewsData.sort((a, b) => {
                     return new Date(b.ctime) - new Date(a.ctime);
                 });
-		updateUrlParam('last_cls_id', allNewsData[0].cls_id);
+		updateUrlParam('last_cls_id', allNewsData[0].ctime);
                 
                 renderNewsList();
                 newsCount.textContent = `${allNewsData.length} 条新闻`;
