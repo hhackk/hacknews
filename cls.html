@@ -381,12 +381,12 @@
             try {
                 const results = await Promise.all(fetchPromises);
                 allNewsData = results.flat();
-                updateUrlParam('last_cls_id', allNewsData[0].cls_id);
                 
                 // 按时间排序（最新的在最上面）
                 allNewsData.sort((a, b) => {
                     return new Date(b.ctime) - new Date(a.ctime);
                 });
+		updateUrlParam('last_cls_id', allNewsData[0].cls_id);
                 
                 renderNewsList();
                 newsCount.textContent = `${allNewsData.length} 条新闻`;
