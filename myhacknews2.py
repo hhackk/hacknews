@@ -278,7 +278,7 @@ def filter_article(title, url, fromsiteurl):
                 'tain analysis', 'code analysis', 'IAST', 'RASP', 'osquery', 'huawei', 'machine learning',\
                 'GraphQL', 'terminal', 'dashboard','ftp', 'powerful','recommend', 'lightweight', 'automat', 'roadmap', 'flexible', 'parallel',\
                 'instrument','portable', 'command-line', 'command line', 'log4','gpt', 'Large language model', 'llama', 'chatglm','openai',\
-                'deepseek','gemini','qwen', 'claude'
+                'deepseek','gemini','qwen', 'claude','gemini','GLM','anthropic','agentic','mcp','kimi','MiniMax','ERNIE','openclaw','opencode','codex'
                ]
     for keyword in keywords:
         if keyword.upper() in title.upper():
